@@ -727,7 +727,7 @@
             
             // Валидация полей
             const nickname = document.getElementById('nickname').value.trim();
-            let telegram = document.getElementById('telegram').value.trim();
+            const telegram = document.getElementById('telegram').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const amount = document.getElementById('selectedAmount').value;
             const customAmount = document.getElementById('customAmount').value;
@@ -745,12 +745,6 @@
                 showNotification('❌ Введите ваш Telegram для связи', 'error');
                 document.getElementById('telegram').focus();
                 return;
-            }
-            
-            // Автоматически добавляем @ если его нет и это не номер телефона
-            if (!telegram.startsWith('@') && !telegram.startsWith('+') && !/^\d+$/.test(telegram)) {
-                telegram = '@' + telegram;
-                document.getElementById('telegram').value = telegram;
             }
             
             // Показать лоадер
@@ -809,9 +803,6 @@
                     document.querySelectorAll('.amount-card').forEach(c => c.classList.remove('selected'));
                     document.querySelector('.amount-card').classList.add('selected');
                     document.getElementById('selectedAmount').value = '500';
-                    
-                    // Возвращаем стандартные placeholder
-                    document.getElementById('telegram').placeholder = '@username или номер телефона';
                     
                 } else {
                     throw new Error(result.description || 'Ошибка отправки');
