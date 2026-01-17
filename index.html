@@ -3,361 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serega_Melyakov - самый богатый игрок 12 сервера "Матрёшка РП"</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <title>Форум | Главная</title>
     <style>
-        :root {
-            --primary-color: #1a1a2e;
-            --secondary-color: #16213e;
-            --accent-color: #00a8ff;
-            --gold-color: #ffd700;
-            --text-color: #f1f1f1;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            --transition: all 0.3s ease;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--primary-color);
-            color: var(--text-color);
+            background-color: #1a1d23;
+            color: #e0e0e0;
             line-height: 1.6;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(22, 33, 62, 0.7) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 168, 255, 0.1) 0%, transparent 20%);
             min-height: 100vh;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-
-        /* Header Styles */
+        
+        /* Header */
         header {
-            background-color: var(--secondary-color);
-            padding: 20px 0;
-            box-shadow: var(--shadow);
+            background-color: #12151a;
+            border-bottom: 1px solid #2a2f3a;
+            padding: 15px 0;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
-
+        
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a9eff;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
-
+        
         .logo i {
-            color: var(--gold-color);
-            font-size: 2.2rem;
+            color: #ff6b6b;
         }
-
-        .logo h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            background: linear-gradient(90deg, var(--accent-color), var(--gold-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            background-color: rgba(0, 168, 255, 0.2);
-            color: var(--accent-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 0;
-            background: linear-gradient(135deg, rgba(22, 33, 62, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%);
-            margin-bottom: 40px;
-            border-bottom: 3px solid var(--accent-color);
-        }
-
-        .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .hero-text {
-            flex: 1;
-            min-width: 300px;
-            padding-right: 30px;
-        }
-
-        .hero-text h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            color: var(--gold-color);
-        }
-
-        .hero-text p {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-            color: #ccc;
-        }
-
-        .stats {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .stat-item {
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 15px 20px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-color);
-            min-width: 200px;
-        }
-
-        .stat-item i {
-            color: var(--gold-color);
-            margin-right: 10px;
-        }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .hero-image {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .avatar-placeholder {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            border: 5px solid var(--accent-color);
-            box-shadow: 0 0 25px rgba(0, 168, 255, 0.5);
-            animation: glow 3s infinite alternate;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--gold-color);
-            background: linear-gradient(135deg, rgba(0, 168, 255, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
-        }
-
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 25px rgba(0, 168, 255, 0.5);
-            }
-            to {
-                box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
-            }
-        }
-
-        /* Achievements Section */
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--accent-color);
-            position: relative;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-color), var(--gold-color));
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .achievements {
-            padding: 60px 0;
-        }
-
-        .achievement-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .achievement-card {
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-header {
-            padding: 20px;
-            background-color: rgba(0, 168, 255, 0.1);
-            border-bottom: 2px solid var(--accent-color);
+        
+        .user-menu {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-
-        .card-header i {
-            font-size: 1.8rem;
-            color: var(--gold-color);
+        
+        .auth-btn {
+            background-color: #2a2f3a;
+            color: #e0e0e0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
         }
-
-        .card-body {
-            padding: 20px;
+        
+        .auth-btn:hover {
+            background-color: #3a4050;
         }
-
-        .card-body p {
-            color: #ccc;
+        
+        /* Main Content */
+        main {
+            padding: 30px 0;
         }
-
-        /* Cars Section */
-        .cars {
-            padding: 60px 0;
-            background-color: rgba(0, 0, 0, 0.2);
+        
+        .page-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #ffffff;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2a2f3a;
         }
-
-        .car-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .car-item {
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .car-item:hover {
-            transform: scale(1.03);
-        }
-
-        .car-image-placeholder {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, rgba(0, 168, 255, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--accent-color);
-        }
-
-        .car-info {
-            padding: 15px;
-        }
-
-        .car-name {
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            color: var(--accent-color);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--secondary-color);
-            padding: 40px 0 20px;
-            margin-top: 60px;
-            border-top: 3px solid var(--accent-color);
-        }
-
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+        
+        /* Forums List */
+        .forums-section {
             margin-bottom: 30px;
         }
-
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 20px;
-        }
-
-        .footer-section h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--accent-color);
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
             margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-links a {
+            color: #4a9eff;
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(0, 168, 255, 0.2);
-            border-radius: 50%;
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: var(--transition);
+            gap: 10px;
         }
-
-        .social-links a:hover {
-            background-color: var(--accent-color);
-            color: var(--secondary-color);
-            transform: translateY(-5px);
+        
+        .forum-category {
+            background-color: #12151a;
+            border: 1px solid #2a2f3a;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            overflow: hidden;
         }
-
-        .copyright {
+        
+        .forum-header {
+            background-color: #1a1f28;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2f3a;
+        }
+        
+        .forum-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        
+        .forum-private {
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        .forum-description {
+            padding: 15px;
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+        
+        .forum-description ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .forum-description li {
+            margin-bottom: 5px;
+        }
+        
+        /* Alert Box */
+        .alert-box {
+            background-color: #2a1f1f;
+            border: 1px solid #5a3a3a;
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 4px;
+        }
+        
+        .alert-title {
+            color: #ff6b6b;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .alert-content {
+            font-size: 14px;
+            color: #d0a0a0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #12151a;
+            border-top: 1px solid #2a2f3a;
+            padding: 20px 0;
+            margin-top: 40px;
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
-            font-size: 0.9rem;
+            color: #a0a0a0;
+            font-size: 14px;
         }
-
+        
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -365,40 +192,18 @@
                 gap: 15px;
             }
             
-            .hero-content {
+            .page-title {
+                font-size: 24px;
+            }
+            
+            .forum-header {
                 flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-text {
-                padding-right: 0;
-                margin-bottom: 40px;
-            }
-            
-            .stats {
-                justify-content: center;
-            }
-            
-            .nav-links {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .avatar-placeholder {
-                width: 250px;
-                height: 250px;
-                font-size: 3rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .avatar-placeholder {
-                width: 200px;
-                height: 200px;
-                font-size: 2.5rem;
+                align-items: flex-start;
+                gap: 10px;
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
@@ -406,239 +211,111 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-crown"></i>
-                    <h1>Serega_Melyakov</h1>
+                    <i class="fas fa-comments"></i>
+                    <span>Форум проекта</span>
                 </div>
-                <nav class="nav-links">
-                    <a href="#about"><i class="fas fa-user"></i> Обо мне</a>
-                    <a href="#achievements"><i class="fas fa-trophy"></i> Достижения</a>
-                    <a href="#cars"><i class="fas fa-car"></i> Автопарк</a>
-                    <a href="#contact"><i class="fas fa-envelope"></i> Контакты</a>
-                </nav>
+                <div class="user-menu">
+                    <button class="auth-btn">Вход</button>
+                    <button class="auth-btn">Регистрация</button>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h2>Самый богатый игрок 12 сервера "Матрёшка РП"</h2>
-                    <p>Легендарный игрок с состоянием более 200 миллионов рублей. Бывший администратор проекта с 3-месячным опытом управления сервером. Эксперт в экономике игрового мира и владелец крупнейшего автопарка.</p>
-                    
-                    <div class="stats">
-                        <div class="stat-item">
-                            <i class="fas fa-money-bill-wave"></i>
-                            <div class="stat-value">200M+ ₽</div>
-                            <div class="stat-label">Состояние</div>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <div class="stat-value">3 месяца</div>
-                            <div class="stat-label">Администрирование</div>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-car"></i>
-                            <div class="stat-value">25+</div>
-                            <div class="stat-label">Автомобилей</div>
-                        </div>
-                    </div>
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="page-title">Список форумов</h1>
+        
+        <!-- Forums List -->
+        <div class="forums-section">
+            <h2 class="section-title">
+                <i class="fas fa-exclamation-circle"></i>
+                Жалобы на тех. поддержку
+            </h2>
+            
+            <div class="forum-category">
+                <div class="forum-header">
+                    <div class="forum-name">Жалобы на тех. поддержку</div>
+                    <div class="forum-private">Приватный</div>
                 </div>
-                <div class="hero-image">
-                    <div class="avatar-placeholder">
-                        <i class="fas fa-crown"></i>
-                    </div>
+                <div class="forum-description">
+                    <p>Раздел предназначен для анонимных жалоб на техническую поддержку.</p>
+                    <p>Ознакомьтесь с правилами оформления темы в любом доступном разделе жалоб.</p>
+                </div>
+            </div>
+            
+            <!-- Additional forum sections can be added here -->
+            <div class="forum-category">
+                <div class="forum-header">
+                    <div class="forum-name">Общие обсуждения</div>
+                    <div class="forum-private">Публичный</div>
+                </div>
+                <div class="forum-description">
+                    <p>Общие вопросы и обсуждения, связанные с проектом. Правила общения обязательны для всех.</p>
+                </div>
+            </div>
+            
+            <div class="forum-category">
+                <div class="forum-header">
+                    <div class="forum-name">Технические вопросы</div>
+                    <div class="forum-private">Публичный</div>
+                </div>
+                <div class="forum-description">
+                    <p>Помощь с техническими проблемами, багами и вопросами по работе проекта.</p>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section class="achievements" id="achievements">
-        <div class="container">
-            <h2 class="section-title">Мои достижения</h2>
-            <div class="achievement-cards">
-                <div class="achievement-card">
-                    <div class="card-header">
-                        <i class="fas fa-money-bill-trend-up"></i>
-                        <h3>Финансовый магнат</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Первым достиг капитала в 200 миллионов рублей на 12 сервере "Матрёшка РП". Разработал уникальные стратегии заработка, которые теперь используют многие игроки.</p>
-                    </div>
-                </div>
-                <div class="achievement-card">
-                    <div class="card-header">
-                        <i class="fas fa-user-shield"></i>
-                        <h3>Опытный администратор</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Успешно управлял сервером в течение 3 месяцев. За это время улучшил экономический баланс и разрешил множество сложных конфликтов между игроками.</p>
-                    </div>
-                </div>
-                <div class="achievement-card">
-                    <div class="card-header">
-                        <i class="fas fa-car-side"></i>
-                        <h3>Коллекционер автомобилей</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Собрал одну из самых впечатляющих коллекций автомобилей на сервере. В автопарке представлены как редкие эксклюзивные модели, так и самые дорогие автомобили игры.</p>
-                    </div>
-                </div>
+        
+        <!-- Alert Box -->
+        <div class="alert-box">
+            <div class="alert-title">
+                <i class="fas fa-exclamation-triangle"></i>
+                Важное предупреждение
+            </div>
+            <div class="alert-content">
+                <p>Никогда не ведитесь на сторонние ссылки мошенников, не давайте и не вводите никуда свои персональные данные! А также не старайтесь пополнить счёт своего игрового аккаунта через какие-либо ссылки, даже если они перенаправляют вас на официальные ресурсы. Помните, пополнение действительно только в игре!</p>
             </div>
         </div>
-    </section>
-
-    <!-- Cars Section -->
-    <section class="cars" id="cars">
-        <div class="container">
-            <h2 class="section-title">Мой автопарк</h2>
-            <div class="car-gallery">
-                <div class="car-item">
-                    <div class="car-image-placeholder">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="car-info">
-                        <div class="car-name">Bugatti Chiron</div>
-                        <div class="car-price">Цена: 15,000,000 ₽</div>
-                    </div>
-                </div>
-                <div class="car-item">
-                    <div class="car-image-placeholder">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="car-info">
-                        <div class="car-name">Lamborghini Aventador</div>
-                        <div class="car-price">Цена: 12,500,000 ₽</div>
-                    </div>
-                </div>
-                <div class="car-item">
-                    <div class="car-image-placeholder">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="car-info">
-                        <div class="car-name">Rolls-Royce Phantom</div>
-                        <div class="car-price">Цена: 10,800,000 ₽</div>
-                    </div>
-                </div>
-                <div class="car-item">
-                    <div class="car-image-placeholder">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="car-info">
-                        <div class="car-name">Mercedes-Benz G-Class</div>
-                        <div class="car-price">Цена: 8,200,000 ₽</div>
-                    </div>
-                </div>
-                <div class="car-item">
-                    <div class="car-image-placeholder">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="car-info">
-                        <div class="car-name">Ferrari 488 GTB</div>
-                        <div class="car-price">Цена: 11,300,000 ₽</div>
-                    </div>
-                </div>
-                <div class="car-item">
-                    <div class="car-image-placeholder">
-                        <i class="fas fa-car"></i>
-                    </div>
-                    <div class="car-info">
-                        <div class="car-name">Porsche 911 Turbo S</div>
-                        <div class="car-price">Цена: 9,500,000 ₽</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </main>
 
     <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Serega_Melyakov</h3>
-                    <p>Самый богатый игрок 12 сервера "Матрёшка РП". Бывший администратор с 3-месячным стажем. Владелец крупнейшего состояния и автопарка на сервере.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-vk"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Достижения</h3>
-                    <ul>
-                        <li>Состояние: 200M+ ₽</li>
-                        <li>Администратор: 3 месяца</li>
-                        <li>Автомобилей: 25+</li>
-                        <li>Статус: Легенда сервера</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Сервер</h3>
-                    <p>Игровой проект: "Матрёшка РП"</p>
-                    <p>Сервер: №12</p>
-                    <p>Режим: RolePlay</p>
-                    <p>IP: matryoshka-rp.com</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>© 2023 Serega_Melyakov. Легенда 12 сервера "Матрёшка РП". Все права защищены.</p>
-            </div>
+            <p>© 2023 Форум проекта. Все права защищены.</p>
+            <p>Правила форума | Конфиденциальность | Контакты</p>
         </div>
     </footer>
 
     <script>
-        // Плавная прокрутка для навигационных ссылок
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
+        // Simple script for button interactions
+        document.querySelectorAll('.auth-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.textContent;
+                alert(`Функция "${action}" в разработке. Это демонстрационная версия форума.`);
             });
         });
         
-        // Добавляем эффект параллакса для заголовка
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if(hero) {
-                hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
-            }
-        });
-        
-        // Анимация появления элементов при прокрутке
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // Make forum categories clickable
+        document.querySelectorAll('.forum-category').forEach(category => {
+            category.addEventListener('click', function() {
+                const forumName = this.querySelector('.forum-name').textContent;
+                const isPrivate = this.querySelector('.forum-private').textContent === 'Приватный';
+                
+                if (isPrivate) {
+                    alert(`Раздел "${forumName}" является приватным. Для доступа требуется авторизация и специальные права.`);
+                } else {
+                    alert(`Переход в раздел: "${forumName}". В реальном форуме здесь открылся бы список тем.`);
                 }
             });
-        }, observerOptions);
-        
-        // Наблюдаем за элементами для анимации
-        document.querySelectorAll('.achievement-card, .car-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(el);
+            
+            // Add hover effect
+            category.style.cursor = 'pointer';
+            category.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#1a1f28';
+            });
+            category.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '#12151a';
+            });
         });
     </script>
 </body>
