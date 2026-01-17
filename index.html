@@ -161,14 +161,19 @@
             text-align: center;
         }
 
-        .avatar {
+        .avatar-placeholder {
             width: 300px;
             height: 300px;
             border-radius: 50%;
-            object-fit: cover;
             border: 5px solid var(--accent-color);
             box-shadow: 0 0 25px rgba(0, 168, 255, 0.5);
             animation: glow 3s infinite alternate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--gold-color);
+            background: linear-gradient(135deg, rgba(0, 168, 255, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
         }
 
         @keyframes glow {
@@ -270,10 +275,15 @@
             transform: scale(1.03);
         }
 
-        .car-image {
+        .car-image-placeholder {
             width: 100%;
             height: 180px;
-            object-fit: cover;
+            background: linear-gradient(135deg, rgba(0, 168, 255, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent-color);
         }
 
         .car-info {
@@ -373,6 +383,20 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
+            
+            .avatar-placeholder {
+                width: 250px;
+                height: 250px;
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .avatar-placeholder {
+                width: 200px;
+                height: 200px;
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
@@ -422,7 +446,9 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="https://i.imgur.com/Ybqz8Lp.png" alt="Serega_Melyakov" class="avatar">
+                    <div class="avatar-placeholder">
+                        <i class="fas fa-crown"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -470,42 +496,54 @@
             <h2 class="section-title">Мой автопарк</h2>
             <div class="car-gallery">
                 <div class="car-item">
-                    <img src="https://i.imgur.com/V8QkK7y.jpg" alt="Bugatti Chiron" class="car-image">
+                    <div class="car-image-placeholder">
+                        <i class="fas fa-car"></i>
+                    </div>
                     <div class="car-info">
                         <div class="car-name">Bugatti Chiron</div>
                         <div class="car-price">Цена: 15,000,000 ₽</div>
                     </div>
                 </div>
                 <div class="car-item">
-                    <img src="https://i.imgur.com/6A8hn5s.jpg" alt="Lamborghini Aventador" class="car-image">
+                    <div class="car-image-placeholder">
+                        <i class="fas fa-car"></i>
+                    </div>
                     <div class="car-info">
                         <div class="car-name">Lamborghini Aventador</div>
                         <div class="car-price">Цена: 12,500,000 ₽</div>
                     </div>
                 </div>
                 <div class="car-item">
-                    <img src="https://i.imgur.com/9y8ZqGd.jpg" alt="Rolls-Royce Phantom" class="car-image">
+                    <div class="car-image-placeholder">
+                        <i class="fas fa-car"></i>
+                    </div>
                     <div class="car-info">
                         <div class="car-name">Rolls-Royce Phantom</div>
                         <div class="car-price">Цена: 10,800,000 ₽</div>
                     </div>
                 </div>
                 <div class="car-item">
-                    <img src="https://i.imgur.com/3XsX7QH.jpg" alt="Mercedes-Benz G-Class" class="car-image">
+                    <div class="car-image-placeholder">
+                        <i class="fas fa-car"></i>
+                    </div>
                     <div class="car-info">
                         <div class="car-name">Mercedes-Benz G-Class</div>
                         <div class="car-price">Цена: 8,200,000 ₽</div>
                     </div>
                 </div>
                 <div class="car-item">
-                    <img src="https://i.imgur.com/bLJQc4B.jpg" alt="Ferrari 488 GTB" class="car-image">
+                    <div class="car-image-placeholder">
+                        <i class="fas fa-car"></i>
+                    </div>
                     <div class="car-info">
                         <div class="car-name">Ferrari 488 GTB</div>
                         <div class="car-price">Цена: 11,300,000 ₽</div>
                     </div>
                 </div>
                 <div class="car-item">
-                    <img src="https://i.imgur.com/A5rvD0r.jpg" alt="Porsche 911 Turbo S" class="car-image">
+                    <div class="car-image-placeholder">
+                        <i class="fas fa-car"></i>
+                    </div>
                     <div class="car-info">
                         <div class="car-name">Porsche 911 Turbo S</div>
                         <div class="car-price">Цена: 9,500,000 ₽</div>
