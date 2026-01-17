@@ -424,17 +424,86 @@
             color: #0a0a0a;
         }
         
+        /* Стили для капчи */
+        .captcha-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .captcha-code {
+            font-size: 2.5rem;
+            font-weight: bold;
+            letter-spacing: 10px;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0;
+            padding: 10px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            user-select: none;
+        }
+        
+        .captcha-input {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .captcha-input input {
+            flex: 1;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+        
+        .refresh-captcha {
+            background: rgba(0, 255, 204, 0.2);
+            border: none;
+            color: #00ffcc;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .refresh-captcha:hover {
+            background: rgba(0, 255, 204, 0.3);
+            transform: rotate(180deg);
+        }
+        
+        .captcha-error {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
         @media (max-width: 768px) {
             .neon-title { font-size: 2.5rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .amount-grid { grid-template-columns: repeat(2, 1fr); }
             .form-container { padding: 20px; }
+            .captcha-code { font-size: 2rem; letter-spacing: 5px; }
         }
         
         @media (max-width: 480px) {
             .neon-title { font-size: 2rem; }
             .stats-grid { grid-template-columns: 1fr; }
             .amount-grid { grid-template-columns: 1fr; }
+            .captcha-code { font-size: 1.5rem; letter-spacing: 3px; }
+            .captcha-input { flex-direction: column; }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -535,6 +604,20 @@
                     <textarea id="message" placeholder="Удобное время, способ оплаты, особые пожелания..." rows="3"></textarea>
                 </div>
                 
+                <!-- Капча -->
+                <div class="captcha-container">
+                    <label><i class="fas fa-shield-alt"></i> Введите код с картинки</label>
+                    <div class="captcha-code" id="captchaText">A1B2C3</div>
+                    
+                    <div class="captcha-input">
+                        <input type="text" id="captchaInput" placeholder="Введите код" maxlength="6" required>
+                        <button type="button" class="refresh-captcha" id="refreshCaptcha">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                    <div class="captcha-error" id="captchaError">Неверный код проверки</div>
+                </div>
+                
                 <div class="form-group">
                     <label><i class="fas fa-credit-card"></i> Способ оплаты</label>
                     <div style="display: flex; gap: 15px; flex-wrap: wrap;">
@@ -614,6 +697,39 @@
         const BOT_TOKEN = '8516581985:AAFtSS4IUUXbO2NdYQAxZ0Uon3qyOWqXddk';
         const YOUR_CHAT_ID = '7190496660';
         
+        // Генератор капчи
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let captcha = '';
+            for (let i = 0; i < 6; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return captcha;
+        }
+        
+        let currentCaptcha = generateCaptcha();
+        
+        // Обновление капчи
+        function updateCaptcha() {
+            currentCaptcha = generateCaptcha();
+            document.getElementById('captchaText').textContent = currentCaptcha;
+            document.getElementById('captchaInput').value = '';
+            document.getElementById('captchaError').style.display = 'none';
+        }
+        
+        // Проверка капчи
+        function validateCaptcha() {
+            const userInput = document.getElementById('captchaInput').value.toUpperCase();
+            if (userInput === currentCaptcha) {
+                document.getElementById('captchaError').style.display = 'none';
+                return true;
+            } else {
+                document.getElementById('captchaError').style.display = 'block';
+                updateCaptcha();
+                return false;
+            }
+        }
+        
         // Анимация статистики
         function animateCounter(element, target, duration = 2000) {
             const start = parseInt(element.textContent) || 0;
@@ -632,17 +748,26 @@
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация капчи
+            updateCaptcha();
+            
+            // Кнопка обновления капчи
+            document.getElementById('refreshCaptcha').addEventListener('click', updateCaptcha);
+            
+            // Анимируем статистику
             setTimeout(() => {
                 animateCounter(document.getElementById('clientsCount'), 134);
                 animateCounter(document.getElementById('totalVirts'), 62);
                 document.getElementById('avgTime').textContent = '3-10';
             }, 1000);
             
+            // Прогресс бар
             setTimeout(() => {
                 document.getElementById('progressFill').style.width = '60%';
                 document.getElementById('ordersToday').textContent = '30/50';
             }, 1500);
             
+            // Выбор суммы виртов
             const amountCards = document.querySelectorAll('.amount-card');
             amountCards.forEach(card => {
                 card.addEventListener('click', function() {
@@ -652,6 +777,7 @@
                 });
             });
             
+            // Выбираем первую карточку по умолчанию
             amountCards[0].classList.add('selected');
         });
         
@@ -688,9 +814,16 @@
             }
         }
         
-        // Отправка формы - ИСПРАВЛЕННАЯ
+        // Отправка формы
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            // Проверка капчи
+            if (!validateCaptcha()) {
+                showNotification('❌ Неверный код проверки', 'error');
+                document.getElementById('captchaInput').focus();
+                return;
+            }
             
             const nickname = document.getElementById('nickname').value.trim();
             const telegram = document.getElementById('telegram').value.trim();
@@ -716,7 +849,7 @@
             
             let finalAmount = customAmount || amount;
             
-            // ИСПРАВЛЕНО: Убраны спецсимволы Markdown из сообщения
+            // Сообщение для Telegram
             const telegramMessage = `НОВЫЙ ЗАКАЗ НА ВИРТЫ!\n\n` +
                                    `Ник: ${nickname}\n` +
                                    `Telegram: ${telegram}\n` +
@@ -734,7 +867,6 @@
                     body: JSON.stringify({
                         chat_id: YOUR_CHAT_ID,
                         text: telegramMessage
-                        // parse_mode убран - отправляем простой текст
                     })
                 });
                 
@@ -745,6 +877,7 @@
                     document.getElementById('loader').style.display = 'none';
                     showNotification('✅ Заявка отправлена! С вами свяжутся в Telegram в течение 5 минут.', 'success');
                     
+                    // Обновляем статистику
                     const clientsCount = document.getElementById('clientsCount');
                     clientsCount.textContent = parseInt(clientsCount.textContent) + 1;
                     
@@ -754,10 +887,12 @@
                     document.getElementById('ordersToday').textContent = `${current}/${total}`;
                     document.getElementById('progressFill').style.width = `${(current/total)*100}%`;
                     
+                    // Очищаем форму и обновляем капчу
                     document.getElementById('orderForm').reset();
                     document.querySelectorAll('.amount-card').forEach(c => c.classList.remove('selected'));
                     document.querySelector('.amount-card').classList.add('selected');
                     document.getElementById('selectedAmount').value = '500';
+                    updateCaptcha();
                     
                 } else {
                     throw new Error(result.description || 'Ошибка отправки');
@@ -765,6 +900,7 @@
             } catch (error) {
                 document.getElementById('loader').style.display = 'none';
                 showNotification(`❌ Ошибка: ${error.message}. Попробуйте еще раз.`, 'error');
+                updateCaptcha();
             }
         });
         
