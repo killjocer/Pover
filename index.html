@@ -424,178 +424,23 @@
             color: #0a0a0a;
         }
         
-        /* Админ панель */
-        .admin-panel {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        
-        .admin-btn {
-            background: linear-gradient(45deg, #ff0000, #ff8800);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .admin-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-        }
-        
-        .admin-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .admin-content {
-            background: #1a1a1a;
-            border-radius: 15px;
-            padding: 30px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-            border: 2px solid #00ffcc;
-        }
-        
-        .admin-content h3 {
-            color: #00ffcc;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .price-input-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .price-input-group input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #333;
-            padding: 10px;
-            color: white;
-            border-radius: 5px;
-        }
-        
-        .admin-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .admin-actions button {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .save-btn {
-            background: #00cc00;
-            color: white;
-        }
-        
-        .close-btn {
-            background: #cc0000;
-            color: white;
-        }
-        
         @media (max-width: 768px) {
             .neon-title { font-size: 2.5rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .amount-grid { grid-template-columns: repeat(2, 1fr); }
             .form-container { padding: 20px; }
-            .admin-panel { top: 10px; right: 10px; }
         }
         
         @media (max-width: 480px) {
             .neon-title { font-size: 2rem; }
             .stats-grid { grid-template-columns: 1fr; }
             .amount-grid { grid-template-columns: 1fr; }
-            .price-input-group { grid-template-columns: 1fr; }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="bg-animation"></div>
-    
-    <!-- Кнопка админ-панели -->
-    <div class="admin-panel">
-        <button class="admin-btn" onclick="openAdminPanel()">
-            <i class="fas fa-cog"></i> Админ
-        </button>
-    </div>
-    
-    <!-- Админ панель -->
-    <div class="admin-modal" id="adminModal">
-        <div class="admin-content">
-            <h3><i class="fas fa-user-shield"></i> Панель управления</h3>
-            
-            <div class="form-group">
-                <label><i class="fas fa-coins"></i> Настройка цен</label>
-                <div class="price-input-group">
-                    <input type="number" id="price500" placeholder="Цена за 500 виртов" min="0">
-                    <input type="number" id="price1000" placeholder="Цена за 1,000 виртов" min="0">
-                </div>
-                <div class="price-input-group">
-                    <input type="number" id="price5000" placeholder="Цена за 5,000 виртов" min="0">
-                    <input type="number" id="price10000" placeholder="Цена за 10,000 виртов" min="0">
-                </div>
-                <div class="price-input-group">
-                    <input type="number" id="price1000000" placeholder="Цена за 1,000,000 виртов" min="0">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label><i class="fas fa-percentage"></i> Настройка бонусов</label>
-                <div class="price-input-group">
-                    <input type="number" id="bonus500" placeholder="Бонус для 500" min="0">
-                    <input type="number" id="bonus1000" placeholder="Бонус для 1,000" min="0">
-                </div>
-                <div class="price-input-group">
-                    <input type="number" id="bonus5000" placeholder="Бонус для 5,000" min="0">
-                    <input type="number" id="bonus10000" placeholder="Бонус для 10,000" min="0">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label><i class="fas fa-chart-line"></i> Статистика</label>
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                    <p>Всего заказов: <span id="totalOrders">0</span></p>
-                    <p>Заказов сегодня: <span id="todayOrders">0</span></p>
-                    <p>Общая сумма: <span id="totalRevenue">0</span> ₽</p>
-                </div>
-            </div>
-            
-            <div class="admin-actions">
-                <button class="save-btn" onclick="savePrices()">
-                    <i class="fas fa-save"></i> Сохранить
-                </button>
-                <button class="close-btn" onclick="closeAdminPanel()">
-                    <i class="fas fa-times"></i> Закрыть
-                </button>
-            </div>
-        </div>
-    </div>
     
     <div class="container">
         <header>
@@ -662,28 +507,19 @@
                     <div class="amount-grid" id="amountSelector">
                         <div class="amount-card" data-amount="500">
                             <div class="amount-value">500</div>
-                            <div class="amount-bonus" id="bonusText500">+50 бонус</div>
-                            <div class="amount-price" id="priceText500">100 ₽</div>
+                            <div class="amount-bonus">+50 бонус</div>
                         </div>
                         <div class="amount-card" data-amount="1000">
                             <div class="amount-value">1,000</div>
-                            <div class="amount-bonus" id="bonusText1000">+150 бонус</div>
-                            <div class="amount-price" id="priceText1000">180 ₽</div>
+                            <div class="amount-bonus">+150 бонус</div>
                         </div>
                         <div class="amount-card" data-amount="5000">
                             <div class="amount-value">5,000</div>
-                            <div class="amount-bonus" id="bonusText5000">+1,000 бонус</div>
-                            <div class="amount-price" id="priceText5000">800 ₽</div>
+                            <div class="amount-bonus">+1,000 бонус</div>
                         </div>
                         <div class="amount-card" data-amount="10000">
                             <div class="amount-value">10,000</div>
-                            <div class="amount-bonus" id="bonusText10000">VIP статус</div>
-                            <div class="amount-price" id="priceText10000">1,500 ₽</div>
-                        </div>
-                        <div class="amount-card" data-amount="1000000">
-                            <div class="amount-value">1,000,000</div>
-                            <div class="amount-bonus" id="bonusText1000000">МЕГА ОФФЕР</div>
-                            <div class="amount-price" id="priceText1000000">100 ₽</div>
+                            <div class="amount-bonus">VIP статус</div>
                         </div>
                     </div>
                     <input type="hidden" id="selectedAmount" value="500" required>
@@ -739,28 +575,23 @@
             </div>
             <div class="table-row">
                 <div>Стартовый (500 виртов)</div>
-                <div id="tablePrice500">100 ₽</div>
-                <div><span style="color: #00ffcc;" id="tableBonus500">+50 виртов</span></div>
+                <div>150 ₽</div>
+                <div><span style="color: #00ffcc;">+50 виртов</span></div>
             </div>
             <div class="table-row">
                 <div>Базовый (1,000 виртов)</div>
-                <div id="tablePrice1000">180 ₽</div>
-                <div><span style="color: #00ffcc;" id="tableBonus1000">+150 виртов</span></div>
+                <div>280 ₽</div>
+                <div><span style="color: #00ffcc;">+150 виртов</span></div>
             </div>
             <div class="table-row">
                 <div>Профи (5,000 виртов)</div>
-                <div id="tablePrice5000">800 ₽</div>
-                <div><span style="color: #00ffcc;" id="tableBonus5000">+1,000 виртов</span></div>
+                <div>1,250 ₽</div>
+                <div><span style="color: #00ffcc;">+1,000 виртов</span></div>
             </div>
             <div class="table-row">
                 <div>VIP (10,000 виртов)</div>
-                <div id="tablePrice10000">1,500 ₽</div>
-                <div><span style="color: #00ffcc;" id="tableBonus10000">VIP статус</span></div>
-            </div>
-            <div class="table-row">
-                <div>МЕГА (1,000,000 виртов)</div>
-                <div id="tablePrice1000000">100 ₽</div>
-                <div><span style="color: #00ffcc;" id="tableBonus1000000">МЕГА ОФФЕР</span></div>
+                <div>2,300 ₽</div>
+                <div><span style="color: #00ffcc;">VIP статус</span></div>
             </div>
         </div>
         
@@ -783,115 +614,6 @@
         const BOT_TOKEN = '8516581985:AAFtSS4IUUXbO2NdYQAxZ0Uon3qyOWqXddk';
         const YOUR_CHAT_ID = '7190496660';
         
-        // Цены по умолчанию (1КК за 100₽ исправлено)
-        let prices = {
-            '500': { price: 100, bonus: '+50 бонус' },
-            '1000': { price: 180, bonus: '+150 бонус' },
-            '5000': { price: 800, bonus: '+1,000 бонус' },
-            '10000': { price: 1500, bonus: 'VIP статус' },
-            '1000000': { price: 100, bonus: 'МЕГА ОФФЕР' }
-        };
-        
-        // Загрузка цен из localStorage
-        function loadPrices() {
-            const savedPrices = localStorage.getItem('virtPrices');
-            if (savedPrices) {
-                prices = JSON.parse(savedPrices);
-            }
-            updatePricesDisplay();
-        }
-        
-        // Сохранение цен в localStorage
-        function savePrices() {
-            // Получаем значения из формы
-            prices['500'].price = parseInt(document.getElementById('price500').value) || 100;
-            prices['500'].bonus = `+${document.getElementById('bonus500').value || 50} бонус`;
-            
-            prices['1000'].price = parseInt(document.getElementById('price1000').value) || 180;
-            prices['1000'].bonus = `+${document.getElementById('bonus1000').value || 150} бонус`;
-            
-            prices['5000'].price = parseInt(document.getElementById('price5000').value) || 800;
-            prices['5000'].bonus = `+${document.getElementById('bonus5000').value || 1000} бонус`;
-            
-            prices['10000'].price = parseInt(document.getElementById('price10000').value) || 1500;
-            prices['10000'].bonus = document.getElementById('bonus10000').value || 'VIP статус';
-            
-            prices['1000000'].price = parseInt(document.getElementById('price1000000').value) || 100;
-            prices['1000000'].bonus = document.getElementById('bonus1000000').value || 'МЕГА ОФФЕР';
-            
-            // Сохраняем
-            localStorage.setItem('virtPrices', JSON.stringify(prices));
-            
-            // Обновляем отображение
-            updatePricesDisplay();
-            
-            // Закрываем панель
-            closeAdminPanel();
-            
-            showNotification('✅ Цены успешно обновлены!', 'success');
-        }
-        
-        // Обновление отображения цен
-        function updatePricesDisplay() {
-            // Карточки
-            document.getElementById('priceText500').textContent = prices['500'].price + ' ₽';
-            document.getElementById('bonusText500').textContent = prices['500'].bonus;
-            
-            document.getElementById('priceText1000').textContent = prices['1000'].price + ' ₽';
-            document.getElementById('bonusText1000').textContent = prices['1000'].bonus;
-            
-            document.getElementById('priceText5000').textContent = prices['5000'].price + ' ₽';
-            document.getElementById('bonusText5000').textContent = prices['5000'].bonus;
-            
-            document.getElementById('priceText10000').textContent = prices['10000'].price + ' ₽';
-            document.getElementById('bonusText10000').textContent = prices['10000'].bonus;
-            
-            document.getElementById('priceText1000000').textContent = prices['1000000'].price + ' ₽';
-            document.getElementById('bonusText1000000').textContent = prices['1000000'].bonus;
-            
-            // Таблица
-            document.getElementById('tablePrice500').textContent = prices['500'].price + ' ₽';
-            document.getElementById('tableBonus500').textContent = prices['500'].bonus;
-            
-            document.getElementById('tablePrice1000').textContent = prices['1000'].price + ' ₽';
-            document.getElementById('tableBonus1000').textContent = prices['1000'].bonus;
-            
-            document.getElementById('tablePrice5000').textContent = prices['5000'].price + ' ₽';
-            document.getElementById('tableBonus5000').textContent = prices['5000'].bonus;
-            
-            document.getElementById('tablePrice10000').textContent = prices['10000'].price + ' ₽';
-            document.getElementById('tableBonus10000').textContent = prices['10000'].bonus;
-            
-            document.getElementById('tablePrice1000000').textContent = prices['1000000'].price + ' ₽';
-            document.getElementById('tableBonus1000000').textContent = prices['1000000'].bonus;
-        }
-        
-        // Админ панель
-        function openAdminPanel() {
-            // Заполняем поля текущими значениями
-            document.getElementById('price500').value = prices['500'].price;
-            document.getElementById('bonus500').value = prices['500'].bonus.replace('+', '').replace(' бонус', '');
-            
-            document.getElementById('price1000').value = prices['1000'].price;
-            document.getElementById('bonus1000').value = prices['1000'].bonus.replace('+', '').replace(' бонус', '');
-            
-            document.getElementById('price5000').value = prices['5000'].price;
-            document.getElementById('bonus5000').value = prices['5000'].bonus.replace('+', '').replace(' бонус', '');
-            
-            document.getElementById('price10000').value = prices['10000'].price;
-            document.getElementById('bonus10000').value = prices['10000'].bonus;
-            
-            document.getElementById('price1000000').value = prices['1000000'].price;
-            document.getElementById('bonus1000000').value = prices['1000000'].bonus;
-            
-            // Показываем панель
-            document.getElementById('adminModal').style.display = 'flex';
-        }
-        
-        function closeAdminPanel() {
-            document.getElementById('adminModal').style.display = 'none';
-        }
-        
         // Анимация статистики
         function animateCounter(element, target, duration = 2000) {
             const start = parseInt(element.textContent) || 0;
@@ -910,23 +632,17 @@
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', function() {
-            // Загружаем цены
-            loadPrices();
-            
-            // Анимируем статистику
             setTimeout(() => {
                 animateCounter(document.getElementById('clientsCount'), 134);
                 animateCounter(document.getElementById('totalVirts'), 62);
                 document.getElementById('avgTime').textContent = '3-10';
             }, 1000);
             
-            // Прогресс бар
             setTimeout(() => {
                 document.getElementById('progressFill').style.width = '60%';
                 document.getElementById('ordersToday').textContent = '30/50';
             }, 1500);
             
-            // Выбор суммы виртов
             const amountCards = document.querySelectorAll('.amount-card');
             amountCards.forEach(card => {
                 card.addEventListener('click', function() {
@@ -936,15 +652,7 @@
                 });
             });
             
-            // Выбираем первую карточку по умолчанию
             amountCards[0].classList.add('selected');
-            
-            // Закрытие админ панели по клику вне ее
-            document.getElementById('adminModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeAdminPanel();
-                }
-            });
         });
         
         // Маска для телефона
@@ -980,7 +688,7 @@
             }
         }
         
-        // Отправка формы
+        // Отправка формы - ИСПРАВЛЕННАЯ
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -992,66 +700,41 @@
             const message = document.getElementById('message').value.trim();
             const payment = document.querySelector('input[name="payment"]:checked').value;
             
-            if (!nickname || !telegram) {
-                showNotification('❌ Заполните все обязательные поля', 'error');
+            if (!nickname) {
+                showNotification('❌ Введите ваш ник в игре', 'error');
+                document.getElementById('nickname').focus();
+                return;
+            }
+            
+            if (!telegram) {
+                showNotification('❌ Введите ваш Telegram для связи', 'error');
+                document.getElementById('telegram').focus();
                 return;
             }
             
             document.getElementById('loader').style.display = 'block';
             
             let finalAmount = customAmount || amount;
-            const orderId = 'ORD' + Date.now() + Math.floor(Math.random() * 1000);
             
-            // Сохраняем заказ
-            const orderData = {
-                id: orderId,
-                nickname: nickname,
-                telegram: telegram,
-                phone: phone,
-                amount: finalAmount,
-                price: prices[finalAmount] ? prices[finalAmount].price : 'по запросу',
-                payment: payment,
-                message: message,
-                status: 'new',
-                timestamp: new Date().toISOString()
-            };
-            
-            // Сохраняем в localStorage
-            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-            orders.push(orderData);
-            localStorage.setItem('orders', JSON.stringify(orders));
-            
-            // Формируем сообщение для Telegram с кнопками
-            const telegramMessage = `🆔 Заказ #${orderId}\n\n` +
-                                   `🎮 Ник: ${nickname}\n` +
-                                   `📱 Telegram: ${telegram}\n` +
-                                   `📞 Телефон: ${phone || 'Не указан'}\n` +
-                                   `💰 Сумма: ${finalAmount} виртов\n` +
-                                   `💵 Цена: ${prices[finalAmount] ? prices[finalAmount].price + ' ₽' : 'по запросу'}\n` +
-                                   `💳 Оплата: ${getPaymentMethod(payment)}\n` +
-                                   `📝 Комментарий: ${message || 'Нет'}\n\n` +
-                                   `⏰ Время: ${new Date().toLocaleString('ru-RU')}\n` +
-                                   `📊 Статус: НОВЫЙ`;
+            // ИСПРАВЛЕНО: Убраны спецсимволы Markdown из сообщения
+            const telegramMessage = `НОВЫЙ ЗАКАЗ НА ВИРТЫ!\n\n` +
+                                   `Ник: ${nickname}\n` +
+                                   `Telegram: ${telegram}\n` +
+                                   `Телефон: ${phone || 'Не указан'}\n` +
+                                   `Сумма: ${finalAmount} виртов\n` +
+                                   `Оплата: ${getPaymentMethod(payment)}\n` +
+                                   `Комментарий: ${message || 'Нет'}\n\n` +
+                                   `Время: ${new Date().toLocaleString('ru-RU')}\n` +
+                                   `ID: ${Date.now()}`;
             
             try {
-                // Отправляем в Телеграм
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: YOUR_CHAT_ID,
-                        text: telegramMessage,
-                        reply_markup: {
-                            inline_keyboard: [
-                                [
-                                    { text: "✅ Принять", callback_data: `accept_${orderId}` },
-                                    { text: "❌ Отклонить", callback_data: `reject_${orderId}` }
-                                ],
-                                [
-                                    { text: "📞 Связаться", url: `https://t.me/${telegram.replace('@', '')}` }
-                                ]
-                            ]
-                        }
+                        text: telegramMessage
+                        // parse_mode убран - отправляем простой текст
                     })
                 });
                 
@@ -1062,7 +745,6 @@
                     document.getElementById('loader').style.display = 'none';
                     showNotification('✅ Заявка отправлена! С вами свяжутся в Telegram в течение 5 минут.', 'success');
                     
-                    // Обновляем статистику
                     const clientsCount = document.getElementById('clientsCount');
                     clientsCount.textContent = parseInt(clientsCount.textContent) + 1;
                     
@@ -1072,7 +754,6 @@
                     document.getElementById('ordersToday').textContent = `${current}/${total}`;
                     document.getElementById('progressFill').style.width = `${(current/total)*100}%`;
                     
-                    // Очищаем форму
                     document.getElementById('orderForm').reset();
                     document.querySelectorAll('.amount-card').forEach(c => c.classList.remove('selected'));
                     document.querySelector('.amount-card').classList.add('selected');
