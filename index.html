@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 VIRTSHOP | Заказ виртов Матрёшка RP</title>
+    <title>🔥 DIGITAL MARKET | Товары для Матрёшка RP</title>
     <style>
         * {
             margin: 0;
@@ -40,7 +40,7 @@
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
@@ -141,53 +141,184 @@
             margin-bottom: 5px;
         }
         
-        .progress-section {
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ffcc;
+            box-shadow: 0 20px 40px rgba(0, 255, 204, 0.2);
+        }
+        
+        .product-image {
+            height: 200px;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        .product-content {
             padding: 25px;
-            margin-bottom: 30px;
+        }
+        
+        .product-title {
+            font-size: 1.5rem;
+            color: #00ffcc;
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .product-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .add-to-cart {
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 204, 0.3);
+        }
+        
+        .cart-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
         }
         
-        .progress-title {
+        .cart-title {
+            color: #00ffcc;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cart-items {
+            margin-bottom: 30px;
+        }
+        
+        .cart-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
             margin-bottom: 15px;
+        }
+        
+        .item-info h4 {
             color: #00ffcc;
+            margin-bottom: 5px;
         }
         
-        .progress-bar {
-            height: 10px;
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .quantity-btn {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .remove-item {
+            background: rgba(255, 0, 102, 0.2);
+            border: none;
+            color: #ff0066;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .cart-total {
+            text-align: right;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .total-amount {
+            color: #00ffcc;
+            font-weight: bold;
+        }
+        
+        .checkout-btn {
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            position: relative;
             overflow: hidden;
-            position: relative;
         }
         
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff00cc, #3333ff);
-            width: 0;
-            border-radius: 5px;
-            transition: width 1s ease;
-            position: relative;
+        .checkout-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.4);
         }
         
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shine 2s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .checkout-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
         
         .form-container {
@@ -242,189 +373,6 @@
             box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
         }
         
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300ffcc'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 20px;
-            padding-right: 50px;
-        }
-        
-        .amount-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            margin-top: 10px;
-        }
-        
-        .amount-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid transparent;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-        
-        .amount-card:hover {
-            transform: translateY(-3px);
-            background: rgba(0, 255, 204, 0.1);
-        }
-        
-        .amount-card.selected {
-            background: rgba(0, 255, 204, 0.2);
-            border-color: #00ffcc;
-            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
-        }
-        
-        .amount-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 5px;
-        }
-        
-        .amount-bonus {
-            font-size: 0.9rem;
-            color: #00ffcc;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(45deg, #ff00cc, #3333ff);
-            color: white;
-            border: none;
-            padding: 20px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 15px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
-            margin-top: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 0, 204, 0.4);
-        }
-        
-        .submit-btn:hover::before {
-            left: 100%;
-        }
-        
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        
-        .loader {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top-color: #00ffcc;
-            margin: 0 auto;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-        
-        .confetti {
-            position: fixed;
-            width: 15px;
-            height: 15px;
-            background: #ff00cc;
-            top: 0;
-            opacity: 0;
-            z-index: 1000;
-        }
-        
-        .pricing-table {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 30px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .table-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 15px;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background 0.3s;
-        }
-        
-        .table-row:hover {
-            background: rgba(0, 255, 204, 0.1);
-        }
-        
-        .table-header {
-            color: #00ffcc;
-            font-weight: bold;
-            border-bottom: 2px solid #00ffcc;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 30px;
-            color: rgba(255, 255, 255, 0.5);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #00ffcc;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .social-icon:hover {
-            transform: translateY(-5px);
-            background: #00ffcc;
-            color: #0a0a0a;
-        }
-        
-        /* Стили для капчи */
         .captcha-container {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
@@ -490,20 +438,97 @@
             display: none;
         }
         
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #00ffcc;
+            margin: 0 auto;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            background: #ff00cc;
+            top: 0;
+            opacity: 0;
+            z-index: 1000;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ffcc;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            background: #00ffcc;
+            color: #0a0a0a;
+        }
+        
+        .cart-count {
+            background: #ff0066;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .cart-icon-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        
         @media (max-width: 768px) {
             .neon-title { font-size: 2.5rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .amount-grid { grid-template-columns: repeat(2, 1fr); }
+            .products-grid { grid-template-columns: 1fr; }
             .form-container { padding: 20px; }
             .captcha-code { font-size: 2rem; letter-spacing: 5px; }
-        }
-        
-        @media (max-width: 480px) {
-            .neon-title { font-size: 2rem; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .amount-grid { grid-template-columns: 1fr; }
-            .captcha-code { font-size: 1.5rem; letter-spacing: 3px; }
-            .captcha-input { flex-direction: column; }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -513,21 +538,21 @@
     
     <div class="container">
         <header>
-            <h1 class="neon-title">🔥 VIRTSHOP</h1>
-            <div class="subtitle">ЗАКАЗ ВИРТОВ НА МАТРЁШКА RP</div>
-            <p style="color: rgba(255,255,255,0.7); margin-top: 10px;">Быстро • Безопасно • С гарантией</p>
+            <h1 class="neon-title">🔥 DIGITAL MARKET</h1>
+            <div class="subtitle">ТОВАРЫ ДЛЯ МАТРЁШКА RP</div>
+            <p style="color: rgba(255,255,255,0.7); margin-top: 10px;">Быстрая доставка • Гарантия качества • Поддержка 24/7</p>
         </header>
         
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-number" id="clientsCount">127</div>
-                <div>Довольных клиентов</div>
+                <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+                <div class="stat-number" id="ordersCount">548</div>
+                <div>Успешных заказов</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-coins"></i></div>
-                <div class="stat-number" id="totalVirts">58K</div>
-                <div>Виртов продано</div>
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-number" id="clientsCount">327</div>
+                <div>Довольных клиентов</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-bolt"></i></div>
@@ -537,33 +562,117 @@
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
                 <div class="stat-number">100%</div>
-                <div>Безопасность</div>
+                <div>Безопасность сделок</div>
             </div>
         </div>
         
-        <div class="progress-section">
-            <div class="progress-title">
-                <span>Заказов сегодня</span>
-                <span id="ordersToday">12/50</span>
+        <div class="products-grid">
+            <!-- Товар 1: Аккаунт Gmail -->
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #ff6b6b, #ffa726);">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Аккаунт Gmail</h3>
+                    <p class="product-description">
+                        Новый аккаунт Google/Gmail. Полностью чистый, с уникальным почтовым ящиком. 
+                        Идеально подходит для регистраций и восстановления доступа.
+                    </p>
+                    <div class="product-price">
+                        <i class="fas fa-tag"></i>
+                        <span>50 ₽</span>
+                    </div>
+                    <button class="add-to-cart" data-id="1" data-name="Аккаунт Gmail" data-price="50">
+                        <i class="fas fa-cart-plus"></i> Добавить в корзину
+                    </button>
+                </div>
             </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+            
+            <!-- Товар 2: 1кк для Матрёшка RP -->
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">1,000,000 для Матрёшка RP</h3>
+                    <p class="product-description">
+                        1 миллион игровой валюты для сервера Матрёшка RP. 
+                        Быстрая доставка в течение 5-15 минут после оплаты.
+                    </p>
+                    <div class="product-price">
+                        <i class="fas fa-tag"></i>
+                        <span>120 ₽</span>
+                    </div>
+                    <button class="add-to-cart" data-id="2" data-name="1,000,000 для Матрёшка RP" data-price="120">
+                        <i class="fas fa-cart-plus"></i> Добавить в корзину
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Товар 3: Обзвон на администратора -->
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #8e2de2, #4a00e0);">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Обзвон на администратора</h3>
+                    <p class="product-description">
+                        Услуга обзвона администратора сервера. 
+                        Быстрое решение вопросов через прямое обращение к администрации.
+                    </p>
+                    <div class="product-price">
+                        <i class="fas fa-tag"></i>
+                        <span>100 ₽</span>
+                    </div>
+                    <button class="add-to-cart" data-id="3" data-name="Обзвон на администратора" data-price="100">
+                        <i class="fas fa-cart-plus"></i> Добавить в корзину
+                    </button>
+                </div>
             </div>
         </div>
         
-        <div class="form-container">
+        <div class="cart-section">
+            <h2 class="cart-title">
+                <div class="cart-icon-wrapper">
+                    <i class="fas fa-shopping-cart"></i>
+                    <div class="cart-count" id="cartCount">0</div>
+                </div>
+                Ваша корзина
+            </h2>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- Здесь будут товары из корзины -->
+                <p style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px;">
+                    Корзина пуста. Добавьте товары из каталога выше.
+                </p>
+            </div>
+            
+            <div class="cart-total">
+                Итого: <span class="total-amount" id="totalAmount">0</span> ₽
+            </div>
+            
+            <button class="checkout-btn" id="checkoutBtn" disabled>
+                <i class="fas fa-credit-card"></i> Перейти к оформлению
+            </button>
+        </div>
+        
+        <div class="form-container" id="checkoutForm" style="display: none;">
+            <h2 style="color: #00ffcc; margin-bottom: 30px; text-align: center;">
+                <i class="fas fa-user-check"></i> Оформление заказа
+            </h2>
+            
             <form id="orderForm">
                 <div class="form-group">
                     <label for="nickname"><i class="fas fa-gamepad"></i> Ваш ник в игре</label>
                     <input type="text" id="nickname" placeholder="Например: Serega_Melyakov" required>
-                    <small style="color: rgba(255,255,255,0.5); display: block; margin-top: 5px;">Тот же, что и на сервере</small>
+                    <small style="color: rgba(255,255,255,0.5); display: block; margin-top: 5px;">Для доставки товаров в игре</small>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div class="form-group">
                         <label for="telegram"><i class="fab fa-telegram"></i> Ваш Telegram</label>
                         <input type="text" id="telegram" placeholder="@username или номер телефона" required>
-                        <small style="color: rgba(255,255,255,0.5); display: block; margin-top: 5px;">Для связи с вами</small>
+                        <small style="color: rgba(255,255,255,0.5); display: block; margin-top: 5px;">Для связи по поводу заказа</small>
                     </div>
                     <div class="form-group">
                         <label for="phone"><i class="fas fa-phone"></i> Телефон (необязательно)</label>
@@ -572,36 +681,23 @@
                 </div>
                 
                 <div class="form-group">
-                    <label><i class="fas fa-money-bill-wave"></i> Выберите сумму виртов</label>
-                    <div class="amount-grid" id="amountSelector">
-                        <div class="amount-card" data-amount="500">
-                            <div class="amount-value">500</div>
-                            <div class="amount-bonus">+50 бонус</div>
-                        </div>
-                        <div class="amount-card" data-amount="1000">
-                            <div class="amount-value">1,000</div>
-                            <div class="amount-bonus">+150 бонус</div>
-                        </div>
-                        <div class="amount-card" data-amount="5000">
-                            <div class="amount-value">5,000</div>
-                            <div class="amount-bonus">+1,000 бонус</div>
-                        </div>
-                        <div class="amount-card" data-amount="10000">
-                            <div class="amount-value">10,000</div>
-                            <div class="amount-bonus">VIP статус</div>
-                        </div>
+                    <label for="orderDetails"><i class="fas fa-clipboard-list"></i> Состав заказа</label>
+                    <textarea id="orderDetails" rows="4" readonly style="background: rgba(255,255,255,0.05);"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-credit-card"></i> Способ оплаты</label>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="radio" name="payment" value="card" checked> Банковская карта
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="radio" name="payment" value="qiwi"> QIWI
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px;">
+                            <input type="radio" name="payment" value="crypto"> Криптовалюта
+                        </label>
                     </div>
-                    <input type="hidden" id="selectedAmount" value="500" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customAmount"><i class="fas fa-edit"></i> Или укажите свою сумму</label>
-                    <input type="number" id="customAmount" placeholder="Введите количество виртов" min="100" step="100">
-                </div>
-                
-                <div class="form-group">
-                    <label for="message"><i class="fas fa-comment-dots"></i> Комментарий к заказу</label>
-                    <textarea id="message" placeholder="Удобное время, способ оплаты, особые пожелания..." rows="3"></textarea>
                 </div>
                 
                 <!-- Капча -->
@@ -618,64 +714,19 @@
                     <div class="captcha-error" id="captchaError">Неверный код проверки</div>
                 </div>
                 
-                <div class="form-group">
-                    <label><i class="fas fa-credit-card"></i> Способ оплаты</label>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="radio" name="payment" value="card" checked> Карта
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="radio" name="payment" value="qiwi"> QIWI
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="radio" name="payment" value="crypto"> Крипта
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 5px;">
-                            <input type="radio" name="payment" value="other"> Другое
-                        </label>
-                    </div>
-                </div>
-                
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-rocket"></i> ОТПРАВИТЬ ЗАЯВКУ
+                <button type="submit" class="checkout-btn">
+                    <i class="fas fa-rocket"></i> ПОДТВЕРДИТЬ ЗАКАЗ
                 </button>
                 
                 <div class="loader" id="loader">
                     <div class="spinner"></div>
-                    <p style="margin-top: 10px;">Отправляем заявку...</p>
+                    <p style="margin-top: 10px;">Отправляем заказ...</p>
                 </div>
+                
+                <button type="button" id="backToCart" style="background: transparent; border: 2px solid #00ffcc; color: #00ffcc; padding: 15px; width: 100%; border-radius: 10px; margin-top: 15px; cursor: pointer;">
+                    <i class="fas fa-arrow-left"></i> Вернуться в корзину
+                </button>
             </form>
-        </div>
-        
-        <div class="pricing-table">
-            <h3 style="color: #00ffcc; margin-bottom: 20px; text-align: center;">
-                <i class="fas fa-percentage"></i> ЛУЧШИЕ ПРЕДЛОЖЕНИЯ
-            </h3>
-            <div class="table-row table-header">
-                <div>Пакет</div>
-                <div>Цена</div>
-                <div>Бонус</div>
-            </div>
-            <div class="table-row">
-                <div>Стартовый (500 виртов)</div>
-                <div>150 ₽</div>
-                <div><span style="color: #00ffcc;">+50 виртов</span></div>
-            </div>
-            <div class="table-row">
-                <div>Базовый (1,000 виртов)</div>
-                <div>280 ₽</div>
-                <div><span style="color: #00ffcc;">+150 виртов</span></div>
-            </div>
-            <div class="table-row">
-                <div>Профи (5,000 виртов)</div>
-                <div>1,250 ₽</div>
-                <div><span style="color: #00ffcc;">+1,000 виртов</span></div>
-            </div>
-            <div class="table-row">
-                <div>VIP (10,000 виртов)</div>
-                <div>2,300 ₽</div>
-                <div><span style="color: #00ffcc;">VIP статус</span></div>
-            </div>
         </div>
         
         <footer>
@@ -685,7 +736,7 @@
                 <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
                 <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
             </div>
-            <p>© 2024 VIRTSHOP. Все права защищены.</p>
+            <p>© 2024 DIGITAL MARKET. Все права защищены.</p>
             <p style="font-size: 0.9rem; margin-top: 10px; color: rgba(255,255,255,0.3);">
                 <i class="fas fa-shield-alt"></i> Все сделки защищены. Не передавайте данные третьим лицам.
             </p>
@@ -696,6 +747,16 @@
         // Настройки бота
         const BOT_TOKEN = '8516581985:AAFtSS4IUUXbO2NdYQAxZ0Uon3qyOWqXddk';
         const YOUR_CHAT_ID = '7190496660';
+        
+        // Корзина
+        let cart = [];
+        
+        // Товары
+        const products = [
+            { id: 1, name: "Аккаунт Gmail", price: 50, quantity: 0 },
+            { id: 2, name: "1,000,000 для Матрёшка RP", price: 120, quantity: 0 },
+            { id: 3, name: "Обзвон на администратора", price: 100, quantity: 0 }
+        ];
         
         // Генератор капчи
         function generateCaptcha() {
@@ -730,20 +791,92 @@
             }
         }
         
-        // Анимация статистики
-        function animateCounter(element, target, duration = 2000) {
-            const start = parseInt(element.textContent) || 0;
-            const increment = target > start ? 1 : -1;
-            const stepTime = Math.abs(Math.floor(duration / (target - start)));
-            let current = start;
+        // Обновление корзины
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const totalAmount = document.getElementById('totalAmount');
+            const checkoutBtn = document.getElementById('checkoutBtn');
             
-            const timer = setInterval(() => {
-                current += increment;
-                element.textContent = current + (element.id === 'totalVirts' ? 'K' : '');
-                if (current === target) {
-                    clearInterval(timer);
-                }
-            }, stepTime);
+            // Фильтруем товары с количеством > 0
+            cart = products.filter(p => p.quantity > 0);
+            
+            // Обновляем количество
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Обновляем общую сумму
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            totalAmount.textContent = total;
+            
+            // Обновляем кнопку оформления
+            checkoutBtn.disabled = totalItems === 0;
+            
+            // Отрисовываем товары в корзине
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px;">Корзина пуста. Добавьте товары из каталога выше.</p>';
+                return;
+            }
+            
+            let cartHTML = '';
+            cart.forEach(item => {
+                cartHTML += `
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <h4>${item.name}</h4>
+                            <p>${item.price} ₽ × ${item.quantity} шт. = ${item.price * item.quantity} ₽</p>
+                        </div>
+                        <div class="item-controls">
+                            <button class="quantity-btn decrease" data-id="${item.id}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span style="min-width: 30px; text-align: center;">${item.quantity}</span>
+                            <button class="quantity-btn increase" data-id="${item.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="remove-item" data-id="${item.id}">
+                                <i class="fas fa-trash"></i> Удалить
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = cartHTML;
+            
+            // Добавляем обработчики для кнопок в корзине
+            document.querySelectorAll('.decrease').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    const product = products.find(p => p.id === id);
+                    if (product && product.quantity > 0) {
+                        product.quantity--;
+                        updateCart();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.increase').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    const product = products.find(p => p.id === id);
+                    if (product) {
+                        product.quantity++;
+                        updateCart();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    const product = products.find(p => p.id === id);
+                    if (product) {
+                        product.quantity = 0;
+                        updateCart();
+                    }
+                });
+            });
         }
         
         // Инициализация
@@ -756,39 +889,72 @@
             
             // Анимируем статистику
             setTimeout(() => {
-                animateCounter(document.getElementById('clientsCount'), 134);
-                animateCounter(document.getElementById('totalVirts'), 62);
+                document.getElementById('ordersCount').textContent = '562';
+                document.getElementById('clientsCount').textContent = '341';
                 document.getElementById('avgTime').textContent = '3-10';
             }, 1000);
             
-            // Прогресс бар
-            setTimeout(() => {
-                document.getElementById('progressFill').style.width = '60%';
-                document.getElementById('ordersToday').textContent = '30/50';
-            }, 1500);
-            
-            // Выбор суммы виртов
-            const amountCards = document.querySelectorAll('.amount-card');
-            amountCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    amountCards.forEach(c => c.classList.remove('selected'));
-                    this.classList.add('selected');
-                    document.getElementById('selectedAmount').value = this.dataset.amount;
+            // Добавление товаров в корзину
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    const product = products.find(p => p.id === id);
+                    if (product) {
+                        product.quantity++;
+                        updateCart();
+                        
+                        // Анимация добавления
+                        this.innerHTML = '<i class="fas fa-check"></i> Добавлено!';
+                        this.style.background = 'linear-gradient(45deg, #00ff88, #00ccff)';
+                        
+                        setTimeout(() => {
+                            this.innerHTML = '<i class="fas fa-cart-plus"></i> Добавить в корзину';
+                            this.style.background = 'linear-gradient(45deg, #ff00cc, #3333ff)';
+                        }, 1000);
+                    }
                 });
             });
             
-            // Выбираем первую карточку по умолчанию
-            amountCards[0].classList.add('selected');
-        });
-        
-        // Маска для телефона
-        document.getElementById('phone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.startsWith('7') || value.startsWith('8')) {
-                value = '+7 ' + value.substring(1, 4) + ' ' + value.substring(4, 7) + '-' + 
-                        value.substring(7, 9) + '-' + value.substring(9, 11);
-            }
-            e.target.value = value.trim();
+            // Кнопка оформления заказа
+            document.getElementById('checkoutBtn').addEventListener('click', function() {
+                if (cart.length === 0) return;
+                
+                // Скрываем корзину, показываем форму
+                document.querySelector('.cart-section').style.display = 'none';
+                document.getElementById('checkoutForm').style.display = 'block';
+                
+                // Заполняем детали заказа
+                let orderDetails = 'Ваш заказ:\n';
+                cart.forEach(item => {
+                    orderDetails += `${item.name} × ${item.quantity} шт. = ${item.price * item.quantity} ₽\n`;
+                });
+                orderDetails += `\nИтого: ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)} ₽`;
+                
+                document.getElementById('orderDetails').value = orderDetails;
+                
+                // Прокрутка к форме
+                document.getElementById('checkoutForm').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Кнопка "Вернуться в корзину"
+            document.getElementById('backToCart').addEventListener('click', function() {
+                document.getElementById('checkoutForm').style.display = 'none';
+                document.querySelector('.cart-section').style.display = 'block';
+                document.querySelector('.cart-section').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Маска для телефона
+            document.getElementById('phone').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.startsWith('7') || value.startsWith('8')) {
+                    value = '+7 ' + value.substring(1, 4) + ' ' + value.substring(4, 7) + '-' + 
+                            value.substring(7, 9) + '-' + value.substring(9, 11);
+                }
+                e.target.value = value.trim();
+            });
+            
+            // Инициализируем корзину
+            updateCart();
         });
         
         // Создание конфетти
@@ -814,7 +980,7 @@
             }
         }
         
-        // Отправка формы
+        // Отправка заказа
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -828,10 +994,8 @@
             const nickname = document.getElementById('nickname').value.trim();
             const telegram = document.getElementById('telegram').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            const amount = document.getElementById('selectedAmount').value;
-            const customAmount = document.getElementById('customAmount').value;
-            const message = document.getElementById('message').value.trim();
             const payment = document.querySelector('input[name="payment"]:checked').value;
+            const orderDetails = document.getElementById('orderDetails').value;
             
             if (!nickname) {
                 showNotification('❌ Введите ваш ник в игре', 'error');
@@ -847,18 +1011,16 @@
             
             document.getElementById('loader').style.display = 'block';
             
-            let finalAmount = customAmount || amount;
-            
             // Сообщение для Telegram
-            const telegramMessage = `НОВЫЙ ЗАКАЗ НА ВИРТЫ!\n\n` +
-                                   `Ник: ${nickname}\n` +
-                                   `Telegram: ${telegram}\n` +
-                                   `Телефон: ${phone || 'Не указан'}\n` +
-                                   `Сумма: ${finalAmount} виртов\n` +
-                                   `Оплата: ${getPaymentMethod(payment)}\n` +
-                                   `Комментарий: ${message || 'Нет'}\n\n` +
-                                   `Время: ${new Date().toLocaleString('ru-RU')}\n` +
-                                   `ID: ${Date.now()}`;
+            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const telegramMessage = `НОВЫЙ ЗАКАЗ С САЙТА!\n\n` +
+                                   `👤 Клиент: ${nickname}\n` +
+                                   `📱 Telegram: ${telegram}\n` +
+                                   `📞 Телефон: ${phone || 'Не указан'}\n` +
+                                   `💳 Оплата: ${getPaymentMethod(payment)}\n\n` +
+                                   `🛒 ЗАКАЗ:\n${orderDetails}\n\n` +
+                                   `🕐 Время: ${new Date().toLocaleString('ru-RU')}\n` +
+                                   `🆔 ID заказа: ${Date.now().toString().slice(-8)}`;
             
             try {
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -875,27 +1037,23 @@
                 if (result.ok) {
                     createConfetti();
                     document.getElementById('loader').style.display = 'none';
-                    showNotification('✅ Заявка отправлена! С вами свяжутся в Telegram в течение 5 минут.', 'success');
+                    showNotification('✅ Заказ оформлен! С вами свяжутся в Telegram для подтверждения.', 'success');
                     
-                    // Обновляем статистику
-                    const clientsCount = document.getElementById('clientsCount');
-                    clientsCount.textContent = parseInt(clientsCount.textContent) + 1;
+                    // Очищаем корзину
+                    products.forEach(p => p.quantity = 0);
+                    updateCart();
                     
-                    const ordersToday = document.getElementById('ordersToday').textContent.split('/');
-                    const current = parseInt(ordersToday[0]) + 1;
-                    const total = parseInt(ordersToday[1]);
-                    document.getElementById('ordersToday').textContent = `${current}/${total}`;
-                    document.getElementById('progressFill').style.width = `${(current/total)*100}%`;
-                    
-                    // Очищаем форму и обновляем капчу
-                    document.getElementById('orderForm').reset();
-                    document.querySelectorAll('.amount-card').forEach(c => c.classList.remove('selected'));
-                    document.querySelector('.amount-card').classList.add('selected');
-                    document.getElementById('selectedAmount').value = '500';
-                    updateCaptcha();
+                    // Возвращаем на главную
+                    setTimeout(() => {
+                        document.getElementById('checkoutForm').style.display = 'none';
+                        document.querySelector('.cart-section').style.display = 'block';
+                        document.querySelector('.cart-section').scrollIntoView({ behavior: 'smooth' });
+                        document.getElementById('orderForm').reset();
+                        updateCaptcha();
+                    }, 3000);
                     
                 } else {
-                    throw new Error(result.description || 'Ошибка отправки');
+                    throw new Error(result.description || 'Ошибка отправки заказа');
                 }
             } catch (error) {
                 document.getElementById('loader').style.display = 'none';
@@ -908,8 +1066,7 @@
             const methods = {
                 'card': 'Банковская карта',
                 'qiwi': 'QIWI кошелек',
-                'crypto': 'Криптовалюта',
-                'other': 'Другой способ'
+                'crypto': 'Криптовалюта'
             };
             return methods[method] || method;
         }
@@ -920,15 +1077,24 @@
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: ${type === 'success' ? 'rgba(0,255,204,0.9)' : 'rgba(255,0,102,0.9)'};
+                background: ${type === 'success' ? 'rgba(0,255,204,0.95)' : 'rgba(255,0,102,0.95)'};
                 color: #0a0a0a;
                 padding: 15px 25px;
                 border-radius: 10px;
                 z-index: 10000;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.3);
                 animation: slideIn 0.3s ease;
+                max-width: 400px;
+                border-left: 4px solid ${type === 'success' ? '#00cc99' : '#ff0033'};
+                display: flex;
+                align-items: center;
+                gap: 10px;
             `;
-            notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}"></i> ${text}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}" 
+                   style="font-size: 1.2rem;"></i>
+                <div>${text}</div>
+            `;
             document.body.appendChild(notification);
             
             setTimeout(() => {
@@ -937,6 +1103,7 @@
             }, 5000);
         }
         
+        // Добавляем стили для анимации уведомлений
         const style = document.createElement('style');
         style.textContent = `
             @keyframes slideIn {
