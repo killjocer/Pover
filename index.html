@@ -125,6 +125,17 @@
             overflow: hidden;
         }
         
+        .wheel-section.active {
+            border-color: #00ffcc;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+            animation: wheelPulse 2s infinite alternate;
+        }
+        
+        @keyframes wheelPulse {
+            from { box-shadow: 0 0 20px rgba(0, 255, 204, 0.3); }
+            to { box-shadow: 0 0 40px rgba(0, 255, 204, 0.5); }
+        }
+        
         .wheel-container {
             position: relative;
             width: 300px;
@@ -210,6 +221,17 @@
         .spin-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+        
+        .spin-btn.active {
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            color: white;
+            animation: btnPulse 1s infinite alternate;
+        }
+        
+        @keyframes btnPulse {
+            from { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3); }
+            to { transform: scale(1.05); box-shadow: 0 15px 40px rgba(0, 255, 136, 0.5); }
         }
         
         /* СИСТЕМА УРОВНЕЙ */
@@ -1161,23 +1183,23 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
-                <div class="stat-number" id="ordersCount">548</div>
-                <div>Успешных заказов</div>
+                <div class="stat-number" id="ordersCount">0</div>
+                <div>Ваших заказов</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-number" id="clientsCount">327</div>
-                <div>Довольных клиентов</div>
+                <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                <div class="stat-number" id="totalSpentCount">0 ₽</div>
+                <div>Всего потрачено</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-bolt"></i></div>
-                <div class="stat-number" id="avgTime">5-15</div>
+                <div class="stat-number" id="avgTime">3-10</div>
                 <div>Минут доставка</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
-                <div class="stat-number">100%</div>
-                <div>Безопасность</div>
+                <div class="stat-icon"><i class="fas fa-gift"></i></div>
+                <div class="stat-number" id="bonusAvailable">ДА</div>
+                <div>Колесо доступно</div>
             </div>
         </div>
         
@@ -1214,8 +1236,25 @@
                 <i class="fas fa-gift"></i> КОЛЕСО ФОРТУНЫ
             </h3>
             <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px;">
-                Сделайте заказ от 200₽ и получите шанс выиграть бонус!
+                Накопите 200₽ в покупках и получите шанс выиграть бонус!
+                <br><small>Учитываются все ваши покупки</small>
             </p>
+            
+            <div class="wheel-info" style="background: rgba(255,215,0,0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Накопленная сумма:</div>
+                        <div style="font-size: 1.8rem; font-weight: bold; color: #ffd700;" id="totalSpentWheel">0 ₽</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Доступно при:</div>
+                        <div style="font-size: 1.3rem; font-weight: bold; color: #00ffcc;">200 ₽</div>
+                    </div>
+                </div>
+                <div class="level-progress" style="margin-top: 10px; height: 10px;">
+                    <div class="level-progress-fill" id="wheelProgress" style="background: linear-gradient(90deg, #ffd700, #ff9800);"></div>
+                </div>
+            </div>
             
             <div class="wheel-container">
                 <div class="wheel-pointer">
@@ -1228,7 +1267,7 @@
             </div>
             
             <button class="spin-btn" id="spinWheelBtn" disabled>
-                <i class="fas fa-redo"></i> КРУТИТЬ КОЛЕСО (от 200₽)
+                <i class="fas fa-lock"></i> НАКОПИТЕ 200₽
             </button>
             
             <div id="wheelResult" style="margin-top: 20px; display: none;">
@@ -1367,7 +1406,6 @@
                     <input type="text" id="nickname" placeholder="Например: Serega_Melyakov" required>
                     <small style="color: rgba(255,255,255,0.5); display: block; margin-top: 5px;">
                         Укажите реальный ник с сервера Матрёшка RP
-                        <span id="nickCheckResult" style="margin-left: 10px;"></span>
                     </small>
                 </div>
                 
@@ -1450,7 +1488,7 @@
         // НАСТРОЙКИ
         const BOT_TOKEN = '8516581985:AAFtSS4IUUXbO2NdYQAxZ0Uon3qyOWqXddk';
         const YOUR_CHAT_ID = '7190496660';
-        const ADMIN_PASSWORD = '11223304sos2204'; // Пароль для админ-панели
+        const ADMIN_PASSWORD = '11223304sos2204';
         
         // ТОВАРЫ
         const products = [
@@ -1518,6 +1556,7 @@
         let userLevel = 1;
         let activeBonus = null;
         let isAdminAuthenticated = false;
+        let totalSpent = parseInt(localStorage.getItem('totalSpent')) || 0;
         
         // ГЕНЕРАТОР КАПЧИ
         function generateCaptcha() {
@@ -1612,13 +1651,16 @@
             // Прогресс бар
             const xpRange = nextLevel.xpRequired - currentLevel.xpRequired;
             const currentProgress = userXP - currentLevel.xpRequired;
-            const progressPercent = (currentProgress / xpRange) * 100;
+            const progressPercent = xpRange > 0 ? (currentProgress / xpRange) * 100 : 100;
             
             document.getElementById('levelProgress').style.width = `${progressPercent}%`;
             document.getElementById('nextLevelBonus').textContent = `+${nextLevel.discount}% скидка`;
             
             // Обновляем достижения
             updateAchievements();
+            
+            // Обновляем статистику
+            updateUserStats();
             
             // Сохраняем в localStorage
             localStorage.setItem('userXP', userXP);
@@ -1627,8 +1669,8 @@
         // ДОСТИЖЕНИЯ
         function updateAchievements() {
             const container = document.getElementById('achievementsContainer');
-            const totalSpent = parseInt(localStorage.getItem('totalSpent')) || 0;
-            const orderCount = JSON.parse(localStorage.getItem('orderHistory') || '[]').length;
+            const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            const orderCount = orderHistory.length;
             const wheelWon = localStorage.getItem('wheelWon') === 'true';
             
             // Проверяем достижения
@@ -1656,6 +1698,19 @@
             });
         }
         
+        // СТАТИСТИКА ПОЛЬЗОВАТЕЛЯ
+        function updateUserStats() {
+            const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            const orderCount = orderHistory.length;
+            
+            // Обновляем статистику вверху
+            document.getElementById('ordersCount').textContent = orderCount;
+            document.getElementById('totalSpentCount').textContent = totalSpent + ' ₽';
+            
+            // Обновляем доступность колеса
+            checkWheelAvailability();
+        }
+        
         // КОЛЕСО ФОРТУНЫ
         function initWheel() {
             const wheel = document.getElementById('fortuneWheel');
@@ -1676,25 +1731,61 @@
                 wheel.appendChild(prizeElement);
             });
             
-            // Проверяем доступность колеса
-            checkWheelAvailability();
+            // Обновляем отображение колеса
+            updateWheelDisplay();
         }
         
-        function checkWheelAvailability() {
-            const totalAmount = products.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const spinBtn = document.getElementById('spinWheelBtn');
+        function updateWheelDisplay() {
             const wheelSection = document.getElementById('wheelSection');
+            const spinBtn = document.getElementById('spinWheelBtn');
+            const wheelProgress = document.getElementById('wheelProgress');
+            const totalSpentWheel = document.getElementById('totalSpentWheel');
+            const bonusAvailable = document.getElementById('bonusAvailable');
             
-            if (totalAmount >= 200) {
+            // Обновляем сумму
+            totalSpentWheel.textContent = totalSpent + ' ₽';
+            
+            // Прогресс до 200₽
+            const progressPercent = Math.min((totalSpent / 200) * 100, 100);
+            wheelProgress.style.width = `${progressPercent}%`;
+            
+            // Проверяем, вращал ли уже пользователь колесо
+            const wheelSpunToday = localStorage.getItem('wheelSpunToday') === 'true';
+            const lastSpinDate = localStorage.getItem('lastSpinDate');
+            const today = new Date().toDateString();
+            
+            // Сбрасываем, если новый день
+            if (lastSpinDate !== today) {
+                localStorage.setItem('wheelSpunToday', 'false');
+                localStorage.setItem('lastSpinDate', today);
+            }
+            
+            // Проверяем доступность колеса
+            if (totalSpent >= 200 && !wheelSpunToday) {
+                // Колесо доступно
                 spinBtn.disabled = false;
                 spinBtn.innerHTML = '<i class="fas fa-redo"></i> КРУТИТЬ КОЛЕСО!';
-                wheelSection.style.borderColor = '#00ffcc';
-                wheelSection.style.boxShadow = '0 0 30px rgba(0, 255, 204, 0.3)';
-            } else {
+                spinBtn.classList.add('active');
+                wheelSection.classList.add('active');
+                bonusAvailable.textContent = 'ДА';
+                bonusAvailable.style.color = '#00ffcc';
+            } else if (wheelSpunToday) {
+                // Уже вращали сегодня
                 spinBtn.disabled = true;
-                spinBtn.innerHTML = `<i class="fas fa-lock"></i> КРУТИТЬ КОЛЕСО (нужно ${200 - totalAmount}₽ еще)`;
-                wheelSection.style.borderColor = 'rgba(255, 215, 0, 0.3)';
-                wheelSection.style.boxShadow = 'none';
+                spinBtn.innerHTML = '<i class="fas fa-check"></i> УЖЕ ИСПОЛЬЗОВАНО СЕГОДНЯ';
+                spinBtn.classList.remove('active');
+                wheelSection.classList.remove('active');
+                bonusAvailable.textContent = 'ЗАВТРА';
+                bonusAvailable.style.color = '#ffd700';
+            } else {
+                // Недостаточно денег
+                const needed = 200 - totalSpent;
+                spinBtn.disabled = true;
+                spinBtn.innerHTML = `<i class="fas fa-lock"></i> НУЖНО ЕЩЕ ${needed}₽`;
+                spinBtn.classList.remove('active');
+                wheelSection.classList.remove('active');
+                bonusAvailable.textContent = 'НЕТ';
+                bonusAvailable.style.color = '#ff6b6b';
             }
         }
         
@@ -1712,7 +1803,7 @@
             const randomPrizeIndex = Math.floor(Math.random() * wheelPrizes.length);
             const prize = wheelPrizes[randomPrizeIndex];
             
-            // Вычисляем угол вращения
+            // Вычисляем угол вращения (5 полных оборотов + сектор приза)
             const sliceAngle = 360 / wheelPrizes.length;
             const targetAngle = 360 * 5 + (randomPrizeIndex * sliceAngle) + (sliceAngle / 2);
             
@@ -1721,22 +1812,25 @@
             
             // Через 4 секунды показываем результат
             setTimeout(() => {
-                spinBtn.disabled = false;
-                spinBtn.innerHTML = '<i class="fas fa-redo"></i> КРУТИТЬ КОЛЕСО (от 200₽)';
-                
                 // Показываем результат
                 resultDiv.style.display = 'block';
                 prizeText.textContent = `Вы выиграли: ${prize.text}`;
                 
                 // Сохраняем бонус
                 activeBonus = prize;
+                localStorage.setItem('activeBonus', JSON.stringify(prize));
                 localStorage.setItem('wheelWon', 'true');
+                localStorage.setItem('wheelSpunToday', 'true');
+                localStorage.setItem('lastSpinDate', new Date().toDateString());
                 
                 // Обновляем достижения
                 updateAchievements();
                 
-                // Обновляем доступность колеса
-                checkWheelAvailability();
+                // Обновляем отображение колеса
+                setTimeout(() => {
+                    updateWheelDisplay();
+                    spinBtn.disabled = false;
+                }, 2000);
                 
                 showNotification(`🎁 Поздравляем! Вы выиграли: ${prize.text}`, 'success');
                 
@@ -1777,7 +1871,6 @@
         function showAdminPanel() {
             document.getElementById('adminPanel').style.display = 'block';
             loadAdminData();
-            // Прокрутка к админ панели
             document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth' });
         }
         
@@ -1786,21 +1879,21 @@
         }
         
         function loadAdminData() {
-            const orders = JSON.parse(localStorage.getItem('allOrders') || '[]');
+            const allOrders = JSON.parse(localStorage.getItem('allOrders') || '[]');
             const today = new Date().toDateString();
-            const todayOrders = orders.filter(order => {
+            const todayOrders = allOrders.filter(order => {
                 const orderDate = new Date(order.timestamp).toDateString();
                 return orderDate === today;
             });
             
             // Статистика
-            document.getElementById('adminTotalOrders').textContent = orders.length;
+            document.getElementById('adminTotalOrders').textContent = allOrders.length;
             document.getElementById('adminTodayOrders').textContent = todayOrders.length;
             
-            const totalRevenue = orders.reduce((sum, order) => sum + order.total, 0);
+            const totalRevenue = allOrders.reduce((sum, order) => sum + order.total, 0);
             document.getElementById('adminTotalRevenue').textContent = totalRevenue.toFixed(0) + ' ₽';
             
-            const uniqueUsers = [...new Set(orders.map(order => order.nickname))];
+            const uniqueUsers = [...new Set(allOrders.map(order => order.nickname))];
             document.getElementById('adminActiveUsers').textContent = uniqueUsers.length;
             
             // Таблица заказов
@@ -1808,7 +1901,7 @@
             tableBody.innerHTML = '';
             
             // Показываем последние 10 заказов
-            const recentOrders = orders.slice(-10).reverse();
+            const recentOrders = allOrders.slice(-10).reverse();
             
             recentOrders.forEach(order => {
                 const date = new Date(order.timestamp).toLocaleString('ru-RU');
@@ -1877,7 +1970,6 @@
                 product.quantity++;
                 updateCart();
                 saveCartToStorage();
-                checkWheelAvailability();
                 showNotification(`✅ "${product.name}" добавлен в корзину`, 'success');
             }
         }
@@ -1966,7 +2058,6 @@
                         product.quantity--;
                         updateCart();
                         saveCartToStorage();
-                        checkWheelAvailability();
                     }
                 });
             });
@@ -1979,7 +2070,6 @@
                         product.quantity++;
                         updateCart();
                         saveCartToStorage();
-                        checkWheelAvailability();
                     }
                 });
             });
@@ -1992,7 +2082,6 @@
                         product.quantity = 0;
                         updateCart();
                         saveCartToStorage();
-                        checkWheelAvailability();
                     }
                 });
             });
@@ -2017,8 +2106,24 @@
             }
         }
         
+        // ПРОВЕРКА КОЛЕСА
+        function checkWheelAvailability() {
+            updateWheelDisplay();
+        }
+        
         // ИНИЦИАЛИЗАЦИЯ
         document.addEventListener('DOMContentLoaded', function() {
+            // Загружаем общую сумму потраченных денег
+            const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+            totalSpent = orderHistory.reduce((sum, order) => sum + order.total, 0);
+            localStorage.setItem('totalSpent', totalSpent);
+            
+            // Загружаем активный бонус
+            const savedBonus = localStorage.getItem('activeBonus');
+            if (savedBonus) {
+                activeBonus = JSON.parse(savedBonus);
+            }
+            
             // Рендерим товары
             renderProducts();
             
@@ -2106,16 +2211,17 @@
                 });
                 
                 let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                let discountInfo = '';
                 
                 // Применяем бонус если есть
                 if (activeBonus) {
                     if (activeBonus.type === 'discount') {
                         const discount = total * (activeBonus.value / 100);
                         total -= discount;
-                        orderDetails += `\n🎁 Скидка ${activeBonus.value}%: -${discount.toFixed(0)} ₽`;
+                        discountInfo += `🎁 Бонус колеса ${activeBonus.value}%: -${discount.toFixed(0)} ₽\n`;
                     } else if (activeBonus.type === 'bonus') {
                         total -= activeBonus.value;
-                        orderDetails += `\n🎁 Бонус: -${activeBonus.value} ₽`;
+                        discountInfo += `🎁 Бонус колеса: -${activeBonus.value} ₽\n`;
                     }
                 }
                 
@@ -2124,10 +2230,11 @@
                 if (currentLevel && currentLevel.discount > 0) {
                     const levelDiscount = total * (currentLevel.discount / 100);
                     total -= levelDiscount;
-                    orderDetails += `\n🎮 Скидка уровня ${currentLevel.name}: -${levelDiscount.toFixed(0)} ₽`;
+                    discountInfo += `🎮 Скидка уровня ${currentLevel.name}: -${levelDiscount.toFixed(0)} ₽\n`;
                 }
                 
-                orderDetails += `\n\n💰 ИТОГО: ${total.toFixed(0)} ₽`;
+                orderDetails += `\n${discountInfo}`;
+                orderDetails += `\n💰 ИТОГО: ${total.toFixed(0)} ₽`;
                 
                 document.getElementById('orderDetails').value = orderDetails;
                 document.getElementById('checkoutForm').scrollIntoView({ behavior: 'smooth' });
@@ -2184,13 +2291,31 @@
                 const orderId = 'ORD' + Date.now().toString().slice(-8);
                 
                 // Применяем бонусы
-                let discountInfo = '';
+                let discountDetails = '';
+                let finalTotal = total;
+                
                 if (activeBonus) {
                     if (activeBonus.type === 'discount') {
                         const discount = total * (activeBonus.value / 100);
-                        total -= discount;
-                        discountInfo += `Бонус колеса: -${discount.toFixed(0)}₽\n`;
+                        finalTotal -= discount;
+                        discountDetails += `Бонус колеса: -${discount.toFixed(0)}₽\n`;
+                        // Удаляем использованный бонус
+                        localStorage.removeItem('activeBonus');
+                        activeBonus = null;
+                    } else if (activeBonus.type === 'bonus') {
+                        finalTotal -= activeBonus.value;
+                        discountDetails += `Бонус колеса: -${activeBonus.value}₽\n`;
+                        localStorage.removeItem('activeBonus');
+                        activeBonus = null;
                     }
+                }
+                
+                // Применяем скидку уровня
+                const currentLevel = levels.find(l => l.level === userLevel);
+                if (currentLevel && currentLevel.discount > 0) {
+                    const levelDiscount = finalTotal * (currentLevel.discount / 100);
+                    finalTotal -= levelDiscount;
+                    discountDetails += `Скидка уровня: -${levelDiscount.toFixed(0)}₽\n`;
                 }
                 
                 // Сообщение для Telegram
@@ -2202,8 +2327,8 @@
                                        `🛒 ТОВАРЫ:\n${cart.map(item => 
                                            `${item.name} × ${item.quantity} = ${item.price * item.quantity}₽`
                                        ).join('\n')}\n\n` +
-                                       `${discountInfo}` +
-                                       `💰 СУММА: ${total.toFixed(0)}₽\n` +
+                                       `${discountDetails}` +
+                                       `💰 СУММА: ${finalTotal.toFixed(0)}₽\n` +
                                        `🕐 ${new Date().toLocaleString('ru-RU')}`;
                 
                 try {
@@ -2231,7 +2356,7 @@
                                 quantity: item.quantity,
                                 price: item.price
                             })),
-                            total: total,
+                            total: finalTotal,
                             timestamp: Date.now()
                         };
                         
@@ -2245,23 +2370,24 @@
                         allOrders.push(orderData);
                         localStorage.setItem('allOrders', JSON.stringify(allOrders));
                         
-                        // Начисляем опыт
-                        userXP += Math.floor(total);
-                        updateLevelSystem();
-                        
-                        // Обновляем потраченную сумму
-                        const totalSpent = parseInt(localStorage.getItem('totalSpent') || '0') + total;
+                        // Обновляем общую сумму
+                        totalSpent += finalTotal;
                         localStorage.setItem('totalSpent', totalSpent);
+                        
+                        // Начисляем опыт
+                        userXP += Math.floor(finalTotal);
                         
                         // Показываем успех
                         document.getElementById('loader').style.display = 'none';
                         showNotification(`✅ Заказ #${orderId} оформлен!`, 'success');
                         
-                        // Очищаем корзину и бонусы
+                        // Очищаем корзину
                         products.forEach(p => p.quantity = 0);
-                        activeBonus = null;
                         updateCart();
                         saveCartToStorage();
+                        
+                        // Обновляем системы
+                        updateLevelSystem();
                         checkWheelAvailability();
                         
                         // Возвращаемся
